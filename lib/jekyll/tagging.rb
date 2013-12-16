@@ -36,9 +36,10 @@ module Jekyll
 
           name = yield data if block_given?
 
+          tag_page_name = (name || tag).downcase.gsub(/\s+/, '-')
           site.pages << TagPage.new(
             site, site.source, site.config["tag_#{type}_dir"],
-            "#{name || tag}#{site.layouts[data['layout']].ext}", data
+            "#{tag_page_name}#{site.layouts[data['layout']].ext}", data
           )
         end
       }
