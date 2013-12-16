@@ -101,11 +101,11 @@ module Jekyll
 
     def tag_link(tag, url = tag_url(tag), html_opts = nil)
       html_opts &&= ' ' << html_opts.map { |k, v| %Q{#{k}="#{v}"} }.join(' ')
-      %Q{<a href="#{url}"#{html_opts}>#{tag.downcase.gsub(/\s+/, '-')}</a>}
+      %Q{<a href="#{url}"#{html_opts}>#{tag}</a>}
     end
 
     def tag_url(tag, type = :page, site = Tagger.site)
-      url = File.join('', site.config["tag_#{type}_dir"], ERB::Util.u(tag))
+      url = File.join('', site.config["tag_#{type}_dir"], ERB::Util.u(tag.downcase.gsub(/\s+/, '-')))
       site.permalink_style == :pretty ? url : url << '.html'
     end
 
